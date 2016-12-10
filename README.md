@@ -8,6 +8,7 @@ dataset<-read.csv("dataset_1.csv", header=TRUE)
 
 ###executem les ordres head i summary per obtenir una visió general de què hi ha als camps del dataset:
 head(dataset)
+
 summary(dataset)
 
 ###substituïm el valor nul de l'atribut Ad.size pel valor "native":
