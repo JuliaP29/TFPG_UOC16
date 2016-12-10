@@ -2,8 +2,8 @@
 #Aquest és el repositori de codi del Treball de Fi de Postgrau de la Júlia Planas Pons.
 #En aquest repositori hi trobareu el codi R que s'ha utilitzat per dur a terme aquest Treball de fi de Postgrau.
 
-# Codi del preprocessat del dataset inicial amb l'eina Rstudio:
-#obrim el dataset i l'emmagatzemem dins la variable dataset:
+_Codi del preprocessat del dataset inicial amb l'eina Rstudio:_
+##obrim el dataset i l'emmagatzemem dins la variable dataset:
 dataset<-read.csv("dataset_1.csv", header=TRUE)
 
 #executem les ordres head i summary per obtenir una visió general de què hi ha als camps del dataset:
