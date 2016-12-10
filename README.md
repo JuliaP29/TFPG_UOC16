@@ -7,6 +7,7 @@ _obrim el dataset i l'emmagatzemem dins la variable dataset:_
 dataset<-read.csv("dataset_1.csv", header=TRUE)
 
 _executem les ordres head i summary per obtenir una visió general de què hi ha als camps del dataset:_
+
 head(dataset)
 summary(dataset)
 
