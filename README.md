@@ -12,6 +12,7 @@ summary(dataset)
 
 ###substituïm el valor nul de l'atribut Ad.size pel valor "native":
 dataset$Ad.size<-sub("^$", "native", dataset$Ad.size)
+
 library(magrittr)
 ####tornem a convetir l’atribut en una variable categòrica:
 dataset$Ad.size %<>% factor
@@ -24,14 +25,23 @@ dataset$hora<- substring(dataset$time_id,first=9, last=10)
 
 ###creem una columna i li emmagatzemem la informació del dia de la setmana:
 dataset$dia<-substring(dataset$time_id,first=7,last=8)
-dataset$dia[dataset$dia=="01"]<-"Saturday";
-dataset$dia[dataset$dia=="02"]<-"Sunday";
-dataset$dia[dataset$dia=="03"]<-"Monday";
-dataset$dia[dataset$dia=="04"]<-"Tuesday";
-dataset$dia[dataset$dia=="05"]<-"Wednesday";
-dataset$dia[dataset$dia=="06"]<-"Thursday";
-dataset$dia[dataset$dia=="07"]<-"Friday";
+
+dataset$dia[dataset$dia=="01"]<-"Saturday"
+
+dataset$dia[dataset$dia=="02"]<-"Sunday"
+
+dataset$dia[dataset$dia=="03"]<-"Monday"
+
+dataset$dia[dataset$dia=="04"]<-"Tuesday"
+
+dataset$dia[dataset$dia=="05"]<-"Wednesday"
+
+dataset$dia[dataset$dia=="06"]<-"Thursday"
+
+dataset$dia[dataset$dia=="07"]<-"Friday"
+
 dataset$dia %<>% factor
+
 names(dataset$dia)<-"dia_setmana"
 
 ###creem una columna i li emmagatzemem la informació del dia en format numèric:
@@ -39,6 +49,7 @@ dataset$dia<-substring(dataset$time_id,first=7,last=8)
 
 ###esborrem les files amb 0 impressions:
 nullimps<-which(dataset$Impressions==0)
+
 dataset<-dataset[-nullimps,]
 
 ###transformem la variable numèrica Clicks en una variable categòria amb 0 si no hi ha clic i 1 si hi a clic:
