@@ -24,6 +24,8 @@ dataset<-dataset[!is.na(dataset$Impressions),]
 ###creem una columna per la hora del dia a partir de l'atribut time_id:
 dataset$hora<- substring(dataset$time_id,first=9, last=10)
 
+dataset$hora %<>% factor
+
 ###creem una columna i li emmagatzemem la informació del dia de la setmana:
 dataset$dia<-substring(dataset$time_id,first=7,last=8)
 
@@ -48,6 +50,8 @@ names(dataset$dia)<-"dia_setmana"
 ###creem una columna i li emmagatzemem la informació del dia en format numèric:
 dataset$dia<-substring(dataset$time_id,first=7,last=8)
 
+dataset$dia %<>% factor
+
 ###esborrem les files amb 0 impressions:
 nullimps<-which(dataset$Impressions==0)
 
@@ -55,6 +59,19 @@ dataset<-dataset[-nullimps,]
 
 ###transformem la variable numèrica Clicks en una variable categòria amb 0 si no hi ha clic i 1 si hi a clic:
 dataset$click_categ<-ifelse(dataset$Clicks==0,c("0"),c("1"))
+
+dataset$click_categ %<>% factor
+
+
+##transformem les variables time_id, Agency ID, Creative ID, Inventory ID, que R studio reconeix com a numèriques, en variables categòriques:
+
+dataset$time_id %<>% factor
+
+dataset$Agency.ID %<>% factor
+
+dataset$Creative.ID %<>% factor
+
+dataset$Inventory.ID %<>% factor
 
 ###guardem el dataset en un document csv anomenat dataset_preprocessat:
 write.csv(dataset, "dataset_preprocessat.csv", row.names=FALSE)
