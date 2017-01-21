@@ -78,14 +78,15 @@ write.csv(dataset, "dataset_preprocessat.csv", row.names=FALSE)
 
 ##Codi de l'anàlisi mitjançant regressió logística del dataset:
 ###es crea un subset del dataset incloent només les variables que s'inclouran al model:
-
 ds_regression<- subset(dataset,select=c(4,6,7,8,10,12,13,15,18,20,21))
 
 ###sobre el nou dataset es divideixen les dades en un set de test i un set d'entrenament:
-
 require(caTools)
+
 sample<-sample.split(obs87_2, SplitRatio = 0.7)
+
 train<-subset(obs87_2, sample)
+
 test<-subset(obs87_2, !sample)
 
 ###es crea el model amb la funció glm()
@@ -93,5 +94,3 @@ test<-subset(obs87_2, !sample)
 model <- glm(click_categ ~.,family=binomial(link='logit'),data=train)
 
 ###amb la comanda summary() es veuran els resultats de l'aplicació del model al set d'entrenament
-
-
