@@ -85,9 +85,9 @@ require(caTools)
 
 sample<-sample.split(obs87_2, SplitRatio = 0.7)
 
-train<-subset(obs87_2, sample)
+train<-subset(ds_regression, sample)
 
-test<-subset(obs87_2, !sample)
+test<-subset(ds_regression, !sample)
 
 ###es crea el model amb la funció glm()
 
