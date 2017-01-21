@@ -91,6 +91,6 @@ test<-subset(ds_regression, !sample)
 
 ###es crea el model amb la funció glm()
 
-model <- glm(click_categ ~.,family=binomial,link='logit',data=train)
+model <- glm(click_categ ~.,family=binomial(link='logit'),data=train)
 
 ###amb la comanda summary() es veuran els resultats de l'aplicació del model al set d'entrenament
