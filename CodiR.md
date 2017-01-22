@@ -124,7 +124,9 @@ trainData <- ds_regression[ind==1,]
 testData <- ds_regression[ind==2,]
 
 ###Apliquem l'algoritme
-ArbolRpart_ctree <- rpart(click_param~., method="class", data=trainData)
+library(rpart)
+
+ArbolRpart_ctree <- rpart(click_categ~., method="class", data=trainData)
 
 ###Obtenima la relació de regles d'associació de l'arbre en format llista
 print(ArbolRpart_ctree) # estadístiques detallades de cada node
