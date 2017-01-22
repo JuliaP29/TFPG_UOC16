@@ -63,7 +63,7 @@ dataset$click_categ<-ifelse(dataset$Clicks==0,c("0"),c("1"))
 dataset$click_categ %<>% factor
 
 
-##transformem les variables time_id, Agency ID, Creative ID, Inventory ID, que R studio reconeix com a numèriques, en variables categòriques:
+###transformem les variables time_id, Agency ID, Creative ID, Inventory ID, que R studio reconeix com a numèriques, en variables categòriques:
 
 dataset$time_id %<>% factor
 
@@ -93,7 +93,7 @@ test<-subset(ds_regression, !sample)
 
 model <- glm(click_categ ~.,family=binomial(link='logit'),data=train)
 
-##o be:
+###o be:
 
 library(caret)
 model_1<-train(click_categ ~ .,  data=train, method="glm", family="binomial")
@@ -111,7 +111,7 @@ confusionMatrix(data=pred_1,test$click_categ)
 ###accuracy
 sum(diag(accuracy_1))/sum(accuracy_1)
 
-
+###Repetir els passos amb diferents data sets incloent només les variables que el model troba com a significatives, també mitjançant la comanda varImp(model_1)
 
 ##Codi per executar l'algoritme d'arbre de decisió sobre el dataset
 ###Dividim el fitxer en 70% entrenament i 30% validació
