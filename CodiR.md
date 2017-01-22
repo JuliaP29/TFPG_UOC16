@@ -93,7 +93,24 @@ test<-subset(ds_regression, !sample)
 
 model <- glm(click_categ ~.,family=binomial(link='logit'),data=train)
 
+##o be:
+
+model_1<-train(click_categ ~ .,  data=train, method="glm", family="binomial")
+
 ###amb la comanda summary() es veuran els resultats de l'aplicació del model al set d'entrenament
+
+##Avaluació de la bondat del model de regressió:
+###es fan les prediccions
+pred_1 <- predict(model_1, newdata=test)
+
+#matriu de confusió
+accuracy_1 <- table(pred_1, test[,"click_categ"])
+confusionMatrix(data=pred_1,test$click_categ)
+
+#accuracy
+sum(diag(accuracy_1))/sum(accuracy_1)
+
+
 
 ##Codi per executar l'algoritme d'arbre de decisió sobre el dataset
 ###Dividim el fitxer en 70% entrenament i 30% validació
