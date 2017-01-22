@@ -83,7 +83,7 @@ ds_regression<- subset(dataset,select=c(4,6,7,8,10,12,13,15,18,20,21))
 ###sobre el nou dataset es divideixen les dades en un set de test i un set d'entrenament:
 require(caTools)
 
-sample<-sample.split(obs87_2, SplitRatio = 0.7)
+sample<-sample.split(ds_regression, SplitRatio = 0.7)
 
 train<-subset(ds_regression, sample)
 
@@ -94,3 +94,38 @@ test<-subset(ds_regression, !sample)
 model <- glm(click_categ ~.,family=binomial(link='logit'),data=train)
 
 ###amb la comanda summary() es veuran els resultats de l'aplicació del model al set d'entrenament
+
+##Codi per executar l'algoritme d'arbre de decisió sobre el dataset
+###Dividim el fitxer en 70% entrenament i 30% validació
+set.seed(1234)
+
+ind <- sample(2, nrow(ds_regression), replace=TRUE, prob=c(0.7, 0.3))
+
+trainData <- ds_regression[ind==1,]
+
+testData <- ds_regression[ind==2,]
+
+###Apliquem l'algoritme
+ArbolRpart_ctree <- rpart(click_param~., method="class", data=trainData)
+
+###Obtenima la relació de regles d'associació de l'arbre en format llista
+print(ArbolRpart_ctree) # estadístiques detallades de cada node
+
+###Obtenim l'arbre amb un disseny gràfic cuidat
+f13<-rpart.plot(ArbolRpart_ctree,extra=4) #visualitzem l'arbre
+
+summary(ArbolRpart_ctree) # estadístiques detallades de cada node
+
+printcp(ArbolRpart_ctree) # estadístiques de resultats
+
+plotcp(ArbolRpart_ctree) # evolució de l'error a mesura que s'incrementen els nodes
+
+###Validem la capacitat de predicció de l'arbre amb el ftxer de validació
+testPredRpart <- predict(ArbolRpart_ctree, newdata = testData, type = "class")
+
+###Visualitzem la matriu de confusió
+table(testPredRpart, testData$click_categ)
+
+###Calculem el % d'encerts (Accuracy)
+sum(testPredRpart == testData$click_param)/ length(testData$click_param)*100
+
